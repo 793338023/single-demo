@@ -24,3 +24,9 @@ lerna init --independent
 若使用 yarn,可以使用 workspaces 模式，通过这样设置后，只有顶层有一个 node_modules，那么在统一每个子 package 都使用顶级的 node_modules，这样可以解决项目间包的版本一致等问题。
 
 lerna 使用，可以自行查找，其实就是把一些指令放到顶级执行，通过 npm 也可以达到 lerna 效果，只是 lerna 比较有约束，而且简化了某些操作，使用它更减少不遵守约束的问题和便利。
+
+### [commn](./packages/common/README.md)
+
+### [components](./packages/components/README.md)
+
+### [my-demo](./packages/my-demo/README.md)
