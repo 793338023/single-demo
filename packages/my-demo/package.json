@@ -169,5 +169,6 @@
       "react-app"
     ]
   },
-  "proxy": "http://127.0.0.1:3011"
+  "proxy": "http://127.0.0.1:3011",
+  "homepage": "."
 }

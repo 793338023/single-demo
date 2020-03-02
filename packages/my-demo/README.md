@@ -305,3 +305,74 @@ import "antd/es/input/style";
 ```
 
 这样我们就可以在项目里都使用 less 了。
+
+## 新建工程
+
+拷贝当前项目，需要修改 port，package.json 里 scripts 的 start 的 port,proxy 的 port,dbServer.js 文件的 port
+而 scripts 的 start 的 port 和 proxy 的 port 不能一样
+
+由于项目会本地启动两个端口提供开发代码，一个为项目服务器，一个是 mock 数据服务器，当前项目为 3010 与 3011
+
+如果不同启动两个项目，那么就不出现端口占用的问题，当启动多个项目的本地服务器，那么就会出现占用，所以新建项目，如果可以那么就调整一个项目的使用端口。
+
+当然，如果你是使用当前架构实现整个工程的微服务化，那么最后使用项目内部的子项目都打包出静态资源，然后在项目的最外层启动静态服务器，而开发的项目启动本地服务器，然后使用反向代理的形式把所有静态资源串联起来，那么就可以看到完整项目
+而这方面有很多方案可以解决，只要看当前那个对你来说最好实现。
+
+## homepage
+
+html 里的静态资源在服务器上不是在根路径加载，那么就要配置 package.json 的 homepage，否则会获取不到 js 和 css 等资源
+如:
+
+```
+// 网络上的环境地址
+https://www.abcdemo.com/to/todolist/index.html
+
+// homepage配置
+homepage:"/to/todolist"
+
+```
+
+其实使用环境变量也是可以，而且也比较灵活，它们优先顺序是 PUBLIC_URL、homepage，当设置环境变量，那么 homepage 就无效。
+
+## 自动部署打包策略
+
+这个具体项目所在环境具体实现。
+
+以下是 Jenkins 为例：
+由于 Jenkins 在这方面很成熟，可以集成 jithub 或 gitlab、代码检查、打包等功能。
+
+其实就是 npm 指令:
+
+```
+cd single-demo/pagekages
+cd common
+npm i
+npm run build
+cd ../components
+npm i
+npm run build
+cd ../my-demo
+npm i
+npm run build
+```
+
+然后抽取打包出来的目录，如 dist 与 build,放到对应的目录里，这个目录结构可以规划。
+如:
+
+```
+|——packages
+│  ├─my-demo
+│  ├─my-demo2
+│  ├─my-demo3
+
+如一个门户网站
+|——packages
+│  ├─登陆
+│  ├─新闻
+│  ├─视频
+
+只要当前包的业务是独立的，耦合性没有那么强的，那么就可区分为一个包
+
+```
+
+当然我们也是单独打包，单独部署，包之间即可互相关联，但又互相解耦，在我们部署后想从一个域就获取到不同包的资源，可以是 nginx 反向代理
