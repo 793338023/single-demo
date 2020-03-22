@@ -9,7 +9,7 @@ src
 -- components
 ```
 
-在 components 里编写组件，不支持 scss 模块化，既 scss 不能导出 styles 对象变量。
+在 components 里编写组件，不支持 es6 导出 scss 模块化，既 scss 不能导出 styles 对象变量在 es6 导出里，因为打包就报错了，但我们可以使用 common.js 的导出标准，这个就可以在打包时绕过 es6 导出打包编译，但我们的项目要支持 scss 模块化导出，否则也是不能在项目中使用的。
 如:
 
 ```
@@ -18,6 +18,9 @@ import styles from "styles.module.scss"
 
 支持
 import "styles.scss"
+
+支持
+const styles = require("styles.module.scss")
 
 ```
 

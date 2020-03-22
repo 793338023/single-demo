@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { AxiosRespWithWebAPI } from "@/common/http";
 import qryList, { Resp as QryListResp } from "@/common/services/qryList";
 import styles from "./style.module.scss";
-import { Table, Tag } from "antd";
+import { Table, Tag, Button } from "antd";
+import { event, req } from "@/common/utils";
+
 interface Props {}
 
 const Home: React.FC<Props> = () => {
@@ -18,6 +20,13 @@ const Home: React.FC<Props> = () => {
 
   useEffect(() => {
     qryListFn();
+    const fn = (...args: any[]) => {
+      console.log(args, 123);
+    };
+    event.on("axios", fn);
+    return () => {
+      event.delete("axios", fn);
+    };
   }, []);
 
   const columns = [
@@ -59,6 +68,13 @@ const Home: React.FC<Props> = () => {
   return (
     <div>
       <p className={styles.wrapper}>例子：abc</p>
+      <Button
+        onClick={() => {
+          req(12, 321, 12312, 4324, 23, "sada");
+        }}
+      >
+        发布订阅
+      </Button>
       <Table
         columns={columns}
         dataSource={data}

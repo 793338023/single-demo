@@ -476,6 +476,7 @@ module.exports = function(webpackEnv) {
               use: getStyleLoaders({
                 importLoaders: 1,
                 sourceMap: isEnvProduction && shouldUseSourceMap,
+                localsConvention: "camelCaseOnly",
                 modules: {
                   getLocalIdent: getCSSModuleLocalIdent
                 }
@@ -518,6 +519,7 @@ module.exports = function(webpackEnv) {
                 {
                   importLoaders: 3,
                   sourceMap: isEnvProduction && shouldUseSourceMap,
+                  localsConvention: "camelCaseOnly",
                   modules: {
                     getLocalIdent: getCSSModuleLocalIdent
                   }

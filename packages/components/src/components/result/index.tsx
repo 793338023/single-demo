@@ -1,10 +1,12 @@
 import React from "react";
-import "./styles.scss";
+// import "./styles.scss";
 import Button from "antd/es/button";
 import "antd/es/button/style";
 import Input from "antd/es/input";
 import "antd/es/input/style";
 
+const styles = require("./styles.module.scss");
+console.log(styles);
 interface Props {
   title: string;
 }
