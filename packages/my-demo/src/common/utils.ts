@@ -3,7 +3,7 @@ export function generateUUID() {
   if (window.performance && typeof window.performance.now === "function") {
     d += performance.now(); //use high-precision timer if available
   }
-  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
+  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (
     c
   ) {
     var r = (d + Math.random() * 16) % 16 | 0;
@@ -34,7 +34,7 @@ export let event: TEvent = {
       // 如果没有绑定对应的消息
       return false;
     }
-    fns.forEach(fn => {
+    fns.forEach((fn) => {
       fn.apply(this, [...args]);
     });
   },
@@ -42,10 +42,10 @@ export let event: TEvent = {
     if (!this.clientList[key]) {
       return false;
     }
-    this.clientList[key] = this.clientList[key].filter(item => {
+    this.clientList[key] = this.clientList[key].filter((item) => {
       return item !== fn;
     });
-  }
+  },
 };
 
 export const req = (...args: any[]) => {
@@ -53,3 +53,5 @@ export const req = (...args: any[]) => {
     event.emit("axios", args);
   }, 2000);
 };
+
+console.log(generateUUID());

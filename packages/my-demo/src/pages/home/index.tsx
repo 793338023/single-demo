@@ -4,16 +4,17 @@ import qryList, { Resp as QryListResp } from "@/common/services/qryList";
 import styles from "./style.module.scss";
 import { Table, Tag, Button } from "antd";
 import { event, req } from "@/common/utils";
+import "./utils";
 
 interface Props {}
-
+// http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&start=2&count=10
 const Home: React.FC<Props> = () => {
   const [data, setdata] = useState<any>([]);
   const qryListFn = async () => {
     const resp: AxiosRespWithWebAPI<QryListResp> = await qryList({});
     console.log(resp);
     const {
-      data: { body }
+      data: { body },
     } = resp;
     setdata(body);
   };
@@ -33,15 +34,15 @@ const Home: React.FC<Props> = () => {
     {
       title: "id",
       dataIndex: "dictId",
-      key: "dictId"
+      key: "dictId",
     },
     {
       title: "名称",
       dataIndex: "dictName",
-      key: "dictName"
+      key: "dictName",
     },
     {
-      title: "状态",
+      title: "状态1",
       key: "status",
       dataIndex: "status",
       render: (status: string) => {
@@ -52,7 +53,7 @@ const Home: React.FC<Props> = () => {
             <Tag color={color[0]}>{color[1]}</Tag>
           </span>
         );
-      }
+      },
     },
     {
       title: "Action",
@@ -61,8 +62,8 @@ const Home: React.FC<Props> = () => {
         <span>
           <a>Delete</a>
         </span>
-      )
-    }
+      ),
+    },
   ];
 
   return (
@@ -78,7 +79,7 @@ const Home: React.FC<Props> = () => {
       <Table
         columns={columns}
         dataSource={data}
-        rowKey={record => record.dictId}
+        rowKey={(record) => record.dictId}
       />
     </div>
   );

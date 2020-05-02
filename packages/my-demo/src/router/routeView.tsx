@@ -3,11 +3,11 @@ import {
   Route,
   withRouter,
   RouteComponentProps,
-  Switch
+  Switch,
 } from "react-router-dom";
 import { RouterViewProps } from "./type";
 import Home from "../pages/home";
-// import HomeR from "../pages/home-redux";
+import HookTest from "../pages/hookTest";
 import ErrCounter from "../pages/buggyCounter";
 import Tabs from "../pages/tabs";
 
@@ -17,7 +17,7 @@ const RouteView: React.FC<Props> = () => {
   return (
     <Switch>
       <Route path="/" component={Home} exact></Route>
-      {/* <Route path="/r" component={HomeR}></Route> */}
+      <Route path="/h" component={HookTest}></Route>
       <Route path="/e" component={ErrCounter}></Route>
       <Route path="/b" component={Tabs}></Route>
     </Switch>
