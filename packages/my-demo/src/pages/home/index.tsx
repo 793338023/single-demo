@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AxiosRespWithWebAPI } from "@/common/http";
 import qryList, { Resp as QryListResp } from "@/common/services/qryList";
 import styles from "./style.module.scss";
-import { Table, Tag, Button } from "antd";
+import { Table, Tag, Button, Input } from "antd";
 import { event, req } from "@/common/utils";
 import "./utils";
 
@@ -21,6 +21,7 @@ const Home: React.FC<Props> = () => {
 
   useEffect(() => {
     qryListFn();
+    console.log("首次加载home组件");
     const fn = (...args: any[]) => {
       console.log(args, 123);
     };
@@ -68,6 +69,7 @@ const Home: React.FC<Props> = () => {
 
   return (
     <div>
+      <Input />
       <p className={styles.wrapper}>例子：abc</p>
       <Button
         onClick={() => {

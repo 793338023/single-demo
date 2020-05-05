@@ -65,6 +65,7 @@
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
     "react": "file:../../node_modules/react",
+    "react-activation": "^0.5.0",
     "react-app-polyfill": "^1.0.6",
     "react-dev-utils": "^10.2.0",
     "react-dom": "file:../../node_modules/react-dom",
@@ -167,6 +168,9 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      "react-activation/babel"
     ]
   },
   "proxy": "http://127.0.0.1:3011",

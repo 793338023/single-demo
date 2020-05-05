@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { Dispatch, AnyAction } from "redux";
 import { connect } from "react-redux";
-import { Table, Tag } from "antd";
+import { Table, Tag, DatePicker } from "antd";
 import { qryList } from "./reducer/actions";
 interface Props
   extends ReturnType<typeof mapStateToProps>,
     ReturnType<typeof mapDispatchToProps> {}
 
-const Home: React.FC<Props> = props => {
+const Home: React.FC<Props> = (props) => {
   useEffect(() => {
     props.handleQryList();
   }, []);
@@ -16,12 +16,12 @@ const Home: React.FC<Props> = props => {
     {
       title: "id",
       dataIndex: "dictId",
-      key: "dictId"
+      key: "dictId",
     },
     {
       title: "名称",
       dataIndex: "dictName",
-      key: "dictName"
+      key: "dictName",
     },
     {
       title: "状态",
@@ -35,7 +35,7 @@ const Home: React.FC<Props> = props => {
             <Tag color={color[0]}>{color[1]}</Tag>
           </span>
         );
-      }
+      },
     },
     {
       title: "Action",
@@ -44,16 +44,21 @@ const Home: React.FC<Props> = props => {
         <span>
           <a>Delete</a>
         </span>
-      )
-    }
+      ),
+    },
   ];
 
+  function onChange(date: any, dateString: any) {
+    console.log(date, dateString);
+  }
   return (
     <div>
+      <DatePicker onChange={onChange} />
+      <br />
       <Table
         columns={columns}
         dataSource={props.qryList.payload || []}
-        rowKey={record => record.dictId}
+        rowKey={(record) => record.dictId}
         loading={props.qryList.loading}
       />
     </div>
@@ -61,16 +66,16 @@ const Home: React.FC<Props> = props => {
 };
 
 const mapStateToProps = (state: any) => {
-  const qryList = state.home.qryList;
+  const qryList = state["home-redux"].qryList;
   return {
-    qryList
+    qryList,
   };
 };
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
   return {
     handleQryList() {
       dispatch(qryList.request({}));
-    }
+    },
   };
 };
 
